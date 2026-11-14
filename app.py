@@ -20,7 +20,7 @@ doc=document.load()
 
 #TEXT SPLITTER
 
-splitter=RecursiveCharacterTextSplitter(chunk_size=400,chunk_overlap=100)
+splitter=RecursiveCharacterTextSplitter(chunk_size=500,chunk_overlap=100)
 chunks=splitter.split_documents(doc)
 # print(len(chunks))
 
@@ -34,7 +34,7 @@ faiss=FAISS.from_documents(chunks,embeddings)
 vectors=faiss.as_retriever(search_kwargs={"k":3})
 
 #MODEL CREATION (GROQ)
-model=ChatGroq(model="qwen/qwen3.8-27b",temperature=0,groq_api_key=os.getenv("GROQ_API_KEY"))
+model=ChatGroq(model="llama-3.1-8b-instant",temperature=0,groq_api_key=os.getenv("GROQ_API_KEY"))
 
 #RETRIEVAL
 
